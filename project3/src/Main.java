@@ -14,6 +14,8 @@ public class Main {
         //constants for list
         String ALL =  "all";
         String PRIORITY = "priority";
+        String REMOVE = "remove";
+        String UPDATE = "update";
         String ZERO = "0";
         String ONE = "1";
         String TWO = "2";
@@ -101,6 +103,47 @@ public class Main {
                 }
 
             }
+            if (userInput.equalsIgnoreCase(UPDATE)){
+                System.out.println("What task would you like to update?");
+                userInput = input.nextLine();
+                for (Task x: todolist){
+                    if (userInput.equalsIgnoreCase(x.getName())){
+                        todolist.remove(x);
+                        System.out.println("What is the new name of your task?");
+                        String name = input.nextLine();
+                        System.out.println("What is the new description of your task?");
+                        String description = input.nextLine();
+                        //add exception handling
+                        int priority = 0;
+                        boolean pass = false;
+                        while(!pass){
+                            try {
+
+                                System.out.println("What is the priority of your task, ( 0 - 5 ) 5 being the highest?");
+                                priority = input.nextInt();
+                                pass = true;
+                            } catch(Exception e){
+                                System.out.println("oh man");
+                                input.nextLine();
+                            }
+                        }
+                        input.nextLine();
+                        input.nextLine();
+                        Task newtask = new Task(name, description, priority);
+                        todolist.add(newtask);
+                    }
+                }
+            }
+            if (userInput.equalsIgnoreCase(REMOVE)) {
+                System.out.println("What is the name of the task you'd like to remove?");
+                userInput = input.nextLine();
+                for (Task x : todolist){
+                    if (userInput.equalsIgnoreCase(x.getName())){
+                        todolist.remove(x);
+                    }
+                }
+            }
+
             if (userInput.equalsIgnoreCase(STOP)){
                 break;
             }
